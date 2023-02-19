@@ -8,13 +8,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^13.1.6",
+    "@styled-system/css": "^5.1.5",
     "next": "12.0.9",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.7.1",
+    "styled-components": "^5.3.6",
+    "styled-system": "^5.1.5"
   },
   "devDependencies": {
     "@types/node": "17.0.12",
     "@types/react": "17.0.38",
+    "@types/styled-components": "^5.1.26",
+    "@types/styled-system": "^5.1.16",
+    "@types/styled-system__css": "^5.0.17",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.9",
     "typescript": "4.5.5"
