@@ -2,7 +2,7 @@ import { useState, SyntheticEvent, useRef } from "react";
 
 import Text from './Text'
 import Box from './Box'
-import Input from './Input'
+import Input, { TextArea } from './Input'
 import Button from './Button'
 
 const ContactUs = () => {
@@ -10,16 +10,22 @@ const ContactUs = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   
-  const formRef = useRef()
+  const formRef = useRef<HTMLFormElement>(null)
   
-  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault()
     setLoading(true);
+    
+    const target = event.target as typeof event.target & {
+      name: { value: string };
+      email: { value: string };
+      message: { value: string };
+    }
 
     const data = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      message: event.target.message.value
+      name: target.name.value,
+      email: target.email.value,
+      message: target.message.value
     }
     
     const JSONdata = JSON.stringify(data)
@@ -34,10 +40,15 @@ const ContactUs = () => {
     }
     
     const response = await fetch(endpoint, options)
-    const result = await response.json()
+    await response.json()
     
-    formRef.current?.reset()
+    setSuccess(true)
+    
+    if (formRef.current) {
+      formRef.current.reset()
+    }
     setLoading(false)
+    setError(true)
   }
 
   return (
@@ -74,13 +85,12 @@ const ContactUs = () => {
             my="sm"
             borderRadius="sm"
           />
-          <Input
-            as="textarea"
+          <TextArea
             placeholder="Message"
             name="message"
             id="message"
             height="100%"
-            rows="4"
+            rows={4}
             required
             my="sm"
             borderRadius="sm"

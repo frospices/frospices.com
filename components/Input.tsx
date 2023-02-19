@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from "react";
+import Box, { BoxProps } from "./Box";
 
-import Box from "./Box";
-
-type Props = React.InputHTMLAttributes<HTMLInputElement>;
-
-const Input = (props: Props) => (
+const Input = (props: React.InputHTMLAttributes<HTMLInputElement> & BoxProps) => (
   <Box
     as="input"
     fontSize="sm"
@@ -16,5 +12,18 @@ const Input = (props: Props) => (
     {...props}
   />
 );
+
+export const TextArea = (props: React.TextareaHTMLAttributes<HTMLTextAreaElement> & BoxProps) => (
+  <Box
+    as="textarea"
+    fontSize="sm"
+    px="sm"
+    borderRadius="lg"
+    height="40px"
+    width="100%"
+    color="gray_500"
+    {...props}
+  />
+)
 
 export default Input;

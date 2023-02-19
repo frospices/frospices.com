@@ -1,4 +1,4 @@
-import { PropsWithChildren, useRef, useState } from 'react'
+import { PropsWithChildren, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa'
 
@@ -10,7 +10,7 @@ const Wrapper = styled(Flex)`
   cursor: pointer;
   width: 100%;
   text-align: left;
-  transition: 0.4s;
+  overflow: hidden;
 `
 
 const Panel = styled(Box)`
@@ -24,12 +24,13 @@ type Props = PropsWithChildren<{
 }>
 
 const Accordion = ({ children, title }: Props) => {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   
   const handleClick = () => {
     setIsOpen(!isOpen)
   }
+ 
   
   return (
     <Box borderColor="border" borderStyle="solid" borderWidth="1px" borderLeft="none" borderRight="none" borderBottom="none" width="100%">
@@ -39,7 +40,7 @@ const Accordion = ({ children, title }: Props) => {
           {isOpen ? <FaMinusCircle color="#ccc" /> : <FaPlusCircle color="#ccc" />}
         </Box>
       </Wrapper>
-      <Panel ref={ref} height={isOpen ? ref.current.scrollHeight: '0'} fontSize="sm">
+      <Panel ref={ref} height={isOpen && ref.current ? ref.current.scrollHeight : 0} fontSize="sm">
         <Box pb="sm">
           {children}
         </Box>

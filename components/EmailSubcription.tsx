@@ -1,4 +1,4 @@
-import { useState, SyntheticEvent } from 'react'
+import { useState, SyntheticEvent, useRef } from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
 
 import Flex from './Flex'
@@ -12,13 +12,19 @@ type Props = {
 
 const EmailSubscription = ({ buttonLabel }: Props) => {
  
- const [isFormSubmitted, setIsFornSubmitted] = useState(false)
+ const [isFormSubmitted, setIsFormSubmitted] = useState(false)
  
- const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
+ const formRef = useRef<HTMLFormElement>(null)
+ 
+ const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault()
+    
+    const target = event.target as typeof event.target & {
+     email: { value: string };
+    }
 
     const data = {
-      email: event.target.email.value 
+      email: target.email.value 
     }
     
     const JSONdata = JSON.stringify(data)
@@ -33,10 +39,12 @@ const EmailSubscription = ({ buttonLabel }: Props) => {
     }
     
     const response = await fetch(endpoint, options)
-    const result = await response.json()
+    await response.json()
     
-    event.target.email.value = ''
-     setIsFornSubmitted(!!response)
+    if (formRef.current) {
+      formRef.current.reset()
+      setIsFormSubmitted(true)
+    }
  }
   
   if (isFormSubmitted) {
@@ -48,7 +56,7 @@ const EmailSubscription = ({ buttonLabel }: Props) => {
   }
    
  return (
-    <Flex alignItems="center" as="form" flexWrap="wrap" onSubmit={handleSubmit}>
+    <Flex alignItems="center" as="form" flexWrap="wrap" onSubmit={handleSubmit} ref={formRef}>
      <Flex flexDirection="column" flex="1">
       <Input type="email" name="email" id="email" placeholder='Enter your email' required />
      </Flex>

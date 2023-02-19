@@ -31,26 +31,26 @@ const TermsAndConditions: NextPage = () => {
         </Box>
         <Box as="li">For the purpose of exploiting, harming, or attempting to exploit or harm minors in any way</Box>
         <Box as="li">
-          To transmit, or procure the sending of, any advertising or promotional material, including
-          any "junk mail," "chain letter," "spam," or any other similar solicitation
+          {`To transmit, or procure the sending of, any advertising or promotional material, including
+          any "junk mail," "chain letter," "spam," or any other similar solicitation`}
         </Box>
         <Box as="li">
           To impersonate or attempt to impersonate Frospices, a Frospices employee, another user, or
           any other person or entity
         </Box>
         <Box as="li">
-          To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of our
+          {`To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of our
           service, or which, as determined by Frospices, may harm Frospices or users of our service or
-          expose them to liability
+          expose them to liability`}
         </Box>
       </Box>
 
       <Text as="h2" fontSize="xl">Modification of Terms and Conditions</Text>
       <Text>
-        We reserve the right, at our sole discretion, to modify or replace these terms and conditions
+        {`We reserve the right, at our sole discretion, to modify or replace these terms and conditions
         at any time. If a revision is material, we will provide at least 30 days' notice prior to any
         new terms taking effect. What constitutes a material change will be determined at our sole
-        discretion.
+        discretion.`}
       </Text>      
 
       <Text as="h2" fontSize="xl">Contact Us</Text>

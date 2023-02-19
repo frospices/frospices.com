@@ -4,7 +4,7 @@ import Flex from './Flex'
 import Text from './Text'
 import Box from './Box'
 
-const Image = styled(Box).attrs({ as: "img"})`
+const Image = styled(Box)`
   object-fit: cover;
   width: 100%;
   max-width: 100%;
@@ -38,6 +38,7 @@ const Features = () => {
           </Box>
            <Flex justifyContent="right" flex="1">
              <Image
+               as="img"
                src="Chef.jpg"
                alt="Chef"
                flex="1"
@@ -46,6 +47,7 @@ const Features = () => {
         </Flex>
         <Flex mt={["lg", "xl"]} justifyContent="space-between" flexDirection={["column-reverse", "row"]}>
           <Image
+            as="img"
             src="customer.jpeg"
             alt="Customer"
             flex="1"

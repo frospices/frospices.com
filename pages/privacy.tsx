@@ -25,14 +25,14 @@ const PrivacyPolicy: NextPage = () => {
       </Text>
       <Text fontSize="xl" as="h2">Information Sharing and Disclosure</Text>
       <Text>
-        We do not sell or rent our users' personal information to third parties. However, we may share the information with third-party service providers who help us provide our services. These service providers are bound by strict confidentiality agreements and are only permitted to use the information to perform services on our behalf.
+        {`We do not sell or rent our users' personal information to third parties. However, we may share the information with third-party service providers who help us provide our services. These service providers are bound by strict confidentiality agreements and are only permitted to use the information to perform services on our behalf.`}
       </Text>
       <Text>
         We may also disclose user information in response to legal requests, such as subpoenas or court orders, or in the interest of public safety or national security.
       </Text>
       <Text as="h2" fontSize="xl">Data Security</Text>
       <Text>
-        We use a variety of security measures to protect the confidentiality and integrity of our users' personal information. This includes secure servers, encryption, and firewalls. However, no data transmission over the Internet or data storage system can be guaranteed to be 100% secure.
+        {`We use a variety of security measures to protect the confidentiality and integrity of our users' personal information. This includes secure servers, encryption, and firewalls. However, no data transmission over the Internet or data storage system can be guaranteed to be 100% secure.`}
       </Text>
       <Text as="h2" fontSize="xl">Changes to this Privacy Policy</Text>
       <Text>

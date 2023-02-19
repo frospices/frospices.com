@@ -45,7 +45,7 @@ const FooterLinks = ({ title, links }: { links: LinkProps[], title: string }) =>
   <>
     <Text fontWeight="bold" fontFamily="primary">{title}</Text>
     {links.map(link => 
-      <Link key={link.href} href={link.href}>
+      <Link key={link.href} href={link.href} passHref>
         <Text fontSize="sm">{link.label}</Text>
       </Link>
      )}

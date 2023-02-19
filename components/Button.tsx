@@ -2,6 +2,12 @@ import styled from 'styled-components';
 import { layout, space, variant } from 'styled-system';
 import css from '@styled-system/css';
 
+import { BoxProps } from "./Box";
+
+type Props = BoxProps & {
+  variant: 'primary' | 'secondary'
+}
+
 const variants = {
   primary: {
     color: 'white',
@@ -36,7 +42,7 @@ const variants = {
   },
 };
 
-const Button = styled.button`
+const Button = styled.button<Props>`
   ${variant({
     variants,
   })}
