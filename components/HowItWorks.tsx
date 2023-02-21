@@ -31,7 +31,7 @@ const HowItWorks = () => (
     <Text as="span" fontSize={["xl", "xxl"]} fontWeight="bold" color="gray_900" mb="sm">How <Text color="primary" as="span">Frospices</Text> Works</Text>
     <Flex justifyContent="space-between" flexDirection={["column", "row"]}>
       {data.steps.map(item => (
-        <Box key={item.id} p="sm" textAlign="center" width="33.333%">
+        <Box key={item.id} p="sm" textAlign="center" width={["100%", "33.333%"]}>
           <Box as="img" src={item.icon} alt={item.content} height="48px" />
           <Text fontWeight="bold" fontSize="md" color="gray_900" mt="sm">{item.title}</Text>
           <Text textAlign="center" mt="xs">{item.content}</Text>
