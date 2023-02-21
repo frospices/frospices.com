@@ -17,19 +17,19 @@ const ContactUs = () => {
     setLoading(true);
     
     const target = event.target as typeof event.target & {
-      name: { value: string };
+      subject: { value: string };
       email: { value: string };
       message: { value: string };
     }
 
     const data = {
-      name: target.name.value,
+      subject: target.subject.value,
       email: target.email.value,
       message: target.message.value
     }
     
     const JSONdata = JSON.stringify(data)
-    const endpoint = '/api/form'
+    const endpoint = '/api/contact'
 
     const options = {
       method: 'POST',
@@ -40,15 +40,19 @@ const ContactUs = () => {
     }
     
     const response = await fetch(endpoint, options)
-    await response.json()
+     
+    if (response.status === 200) {
+     await response.json() 
+     setSuccess(true)
     
-    setSuccess(true)
-    
-    if (formRef.current) {
-      formRef.current.reset()
+      if (formRef.current) {
+        formRef.current.reset()
+        setLoading(false)
+      }
+    } else {
+       setLoading(false)
+       setError(true) 
     }
-    setLoading(false)
-    setError(true)
   }
 
   return (
@@ -61,21 +65,12 @@ const ContactUs = () => {
         </Text>
       )}
       {error && (
-        <Text>
+        <Text color="red">
           There was an error sending your message. Please try again later.
         </Text>
       )}
       {!success && (
         <Box as="form" ref={formRef} onSubmit={handleSubmit}>
-           <Input
-            type="text"
-            placeholder="Name"
-            id="name"
-            name="name"
-            required
-            my="sm"
-            borderRadius="sm"
-           />
           <Input
             type="email"
             placeholder="Email"
@@ -85,6 +80,15 @@ const ContactUs = () => {
             my="sm"
             borderRadius="sm"
           />
+          <Input
+            type="text"
+            placeholder="Subject"
+            id="subject"
+            name="subject"
+            required
+            my="sm"
+            borderRadius="sm"
+           />
           <TextArea
             placeholder="Message"
             name="message"

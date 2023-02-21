@@ -12,7 +12,8 @@ type Props = {
 
 const EmailSubscription = ({ buttonLabel }: Props) => {
  
- const [isFormSubmitted, setIsFormSubmitted] = useState(false)
+ const [message, setMessage] = useState('')
+ const [error, setError] = useState('')
  
  const formRef = useRef<HTMLFormElement>(null)
  
@@ -39,15 +40,19 @@ const EmailSubscription = ({ buttonLabel }: Props) => {
     }
     
     const response = await fetch(endpoint, options)
-    await response.json()
-    
-    if (formRef.current) {
-      formRef.current.reset()
-      setIsFormSubmitted(true)
-    }
+    const result = await response.json()
+     
+    if (response.status === 200) {
+     if (formRef.current) {
+       formRef.current.reset()
+       setMessage(result.message)
+     } 
+    } else {
+     setError(result.message)
+    }  
  }
   
-  if (isFormSubmitted) {
+  if (message) {
    return (
     <Flex alignItems="center">
      <FaCheckCircle color="green" />
@@ -56,6 +61,7 @@ const EmailSubscription = ({ buttonLabel }: Props) => {
   }
    
  return (
+   <>
     <Flex alignItems="center" as="form" flexWrap="wrap" onSubmit={handleSubmit} ref={formRef}>
      <Flex flexDirection="column" flex="1">
       <Input type="email" name="email" id="email" placeholder='Enter your email' required />
@@ -68,6 +74,8 @@ const EmailSubscription = ({ buttonLabel }: Props) => {
       </Button>
     </Flex>
   </Flex>
+  {error && <Text color="red">{error} Please try again later.</Text>}
+  </>
  )
 }
 
