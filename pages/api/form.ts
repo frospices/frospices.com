@@ -1,7 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import sgMail from '@sendgrid/mail';
+import sgClient from '@sendgrid/client'
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+sgClient.setApiKey(process.env.SENDGRID_API_KEY || "")
+
+const addContact = async (email: string) => {
+ const data = {
+  "list_ids": [process.env.SENDGRID_NEWSLETTER_ID],
+   "contacts": [{
+     "email": email,
+   }]
+ }; 
+ 
+ const request = {
+   url: `/v3/marketing/contacts`,
+   method: 'PUT' as const,
+   body: data
+ }
+ 
+ return await sgClient.request(request);
+}
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const body = req.body
@@ -11,8 +31,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const msg = {
-    to: body.email, // Change to your recipient
-    from: 'hello@frospices.com', // Change to your verified sender
+    to: body.email,
+    from: process.env.SENDGRID_VERIFIED_EMAIL!,
     subject: 'Welcome to the Frospices Newsletter',
     html: `
       <!DOCTYPE html>
@@ -79,6 +99,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   
   try {
+    await addContact(body.email);
     await sgMail.send(msg);
     return res.status(200).json({ message: "Email sent successfully." });
   } catch (e) {

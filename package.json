@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@next/font": "^13.1.6",
+    "@sendgrid/client": "^7.7.0",
     "@sendgrid/mail": "^7.7.0",
     "@styled-system/css": "^5.1.5",
     "next": "12.0.9",

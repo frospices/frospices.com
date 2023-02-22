@@ -7,9 +7,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { subject, email, message } = req.body
 
   const msg = {
-    to: 'hello@frospices.com',
+    to: process.env.SENDGRID_VERIFIED_EMAIL!,
     from: {
-      email: 'hello@frospices.com',
+      email: process.env.SENDGRID_VERIFIED_EMAIL!,
       name: 'Contact Form'
     },
     subject: `Contact Form ${subject}`,
