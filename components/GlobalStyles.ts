@@ -2,6 +2,10 @@ import { createGlobalStyle } from "styled-components";
 import css from "@styled-system/css";
 
 const GlobalStyles = createGlobalStyle`
+  html{
+    scroll-behavior:smooth;
+  }
+
   body {
     ${css({
       margin: 0,

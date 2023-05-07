@@ -1,59 +1,59 @@
 import { useState, SyntheticEvent, useRef } from "react";
 
-import Text from './Text'
-import Box from './Box'
-import Input, { TextArea } from './Input'
-import Button from './Button'
+import Text from "./Text";
+import Box from "./Box";
+import Input, { TextArea } from "./Input";
+import Button from "./Button";
 
 const ContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  
-  const formRef = useRef<HTMLFormElement>(null)
-  
+
+  const formRef = useRef<HTMLFormElement>(null);
+
   const handleSubmit = async (event: SyntheticEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     setLoading(true);
-    
+
     const target = event.target as typeof event.target & {
       subject: { value: string };
       email: { value: string };
       message: { value: string };
-    }
+    };
 
     const data = {
       subject: target.subject.value,
       email: target.email.value,
-      message: target.message.value
-    }
-    
-    const JSONdata = JSON.stringify(data)
-    const endpoint = '/api/contact'
+      message: target.message.value,
+    };
+
+    const JSONdata = JSON.stringify(data);
+    const endpoint = "/api/contact";
 
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSONdata,
-    }
-    
-    const response = await fetch(endpoint, options)
-     
+    };
+
+    const response = await fetch(endpoint, options);
+
     if (response.status === 200) {
-     await response.json() 
-     setSuccess(true)
-    
+      await response.json();
+      setSuccess(true);
+
       if (formRef.current) {
-        formRef.current.reset()
-        setLoading(false)
+        formRef.current.reset();
+        setLoading(false);
       }
     } else {
-       setLoading(false)
-       setError(true) 
+      setLoading(false);
+      setError(true);
     }
-  }
+  };
 
   return (
     <Box>
@@ -88,7 +88,7 @@ const ContactUs = () => {
             required
             my="sm"
             borderRadius="sm"
-           />
+          />
           <TextArea
             placeholder="Message"
             name="message"
@@ -100,7 +100,15 @@ const ContactUs = () => {
             borderRadius="sm"
             py="sm"
           />
-          <Button textAlign="center" type="submit" disabled={loading} variant="secondary" px="sm" width={["100%", "50%"]} py="sm">
+          <Button
+            textAlign="center"
+            type="submit"
+            disabled={loading}
+            variant="secondary"
+            px="sm"
+            width={["100%", "50%"]}
+            py="sm"
+          >
             Submit
           </Button>
         </Box>

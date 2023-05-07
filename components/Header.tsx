@@ -65,10 +65,10 @@ const Header = () => {
           mt="sm"
         >
           <Box mx="xs">
-            <NavLink href="/about" label="About us" />
+            <NavLink href="/#about" label="About us" />
           </Box>
           <Box mx="sm">
-            <NavLink href="/cook-with-us" label="Cook with us" />
+            <NavLink href="/#cook-with-us" label="Cook with us" />
           </Box>
         </Flex>
         <Flex flex="1" justifyContent="flex-end">
@@ -88,10 +88,10 @@ const Header = () => {
       </Box>
       <Overlay isOpen={isMenuOpen} onClose={handleClick}>
         <Box p="sm" color="white">
-          <NavLink href="/about" label="About us" />
+          <NavLink href="/#about" label="About us" />
         </Box>
         <Box p="sm" color="white">
-          <NavLink href="/cook-with-us" label="Cook with us" />
+          <NavLink href="/#cook-with-us" label="Cook with us" />
         </Box>
         <Box p="sm">
           <Link href="/contact" passHref>
